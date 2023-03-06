@@ -230,6 +230,7 @@ header.masthead .intro-text .intro-heading {
 #portfolio .portfolio-item {
   right: 0;
   margin: 0 0 15px;
+  background-image: url("../img/descarga.jfif");
 }
 
 #portfolio .portfolio-item .portfolio-link {
