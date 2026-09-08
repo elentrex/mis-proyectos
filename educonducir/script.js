@@ -10,7 +10,7 @@ const pexelsImages = [
   'https://img.freepik.com/free-photo/driving-green-neon-color-motorcycle-road-front-view_114579-5033.jpg',
   'https://img.freepik.com/free-photo/driving-instructor-showing-vehicle-dashboard-buttons-student-taking-driving-lessons_342744-691.jpg',
   'https://img.freepik.com/free-photo/driving-green-neon-color-motorcycle-road-front-view_114579-5033.jpg',
-  'https://img.freepik.com/free-photo/close-up-view-female-student-driving-car-instructor-holding-checklist_342744-689.jpg',
+  'assets/carro-particular-educonducir.jpg',
   'https://img.freepik.com/free-photo/driving-instructor-showing-vehicle-dashboard-buttons-student-taking-driving-lessons_342744-691.jpg',
   'https://img.freepik.com/free-photo/close-up-view-female-student-driving-car-instructor-holding-checklist_342744-689.jpg'
 ];
