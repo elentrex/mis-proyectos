@@ -17,3 +17,6 @@
 
 /* Identidad visual del cliente: amarillo, negro, verde y naranja. */
 :root{--navy:#111111;--ink:#161616;--teal:#08783c;--mint:#f4f8ef;--cream:#fff9e7;--line:#e6d99b;--muted:#5c5c5c;--yellow:#ffc400;--orange:#f47b20}.topbar{background:#111;color:#fff}.brand span{color:var(--yellow)}.nav-cta,.primary{background:var(--yellow);color:#111!important}.secondary{border-color:#d5b400}.pill{color:#08783c;background:#e1f1d8}.course-card.featured{background:#fff8d9;border-color:#e4c12a}.course-code{color:#111}.icon{background:#e8f4dc;color:#08783c}.benefits{background:#fff8e1}.gallery-caption{background:#111}.hero-banner .banner-slide figcaption span{color:var(--yellow)}.hero-banner .dot.active{background:var(--yellow)}.floating-whatsapp{background:#138a43}.dark{background:#111}.contact-band{background:#111}.footer-main a:hover,.text-link{color:#08783c}.hero-banner .banner-slide:after{background:linear-gradient(90deg,#111e 0%,#1118 38%,#1111 75%),linear-gradient(0deg,#111b 0%,transparent 48%)}
+
+
+.brand-logo{display:block;width:148px;height:48px;object-fit:contain;object-position:left center;mix-blend-mode:multiply}.brand{display:flex;align-items:center}@media(max-width:760px){.brand-logo{width:128px;height:42px}}
