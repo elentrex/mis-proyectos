@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Bone Bogotá - Experiencia Gastronómica & Cortes Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        },
+                        stone: {
+                            850: '#1c1917',
+                            900: '#1c1917',
+                            950: '#0c0a09',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(245, 158, 11, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-stone-950 text-stone-200 font-sans antialiased selection:bg-amber-500 selection:text-stone-950 pb-20">
+
+    <!-- PROPOSAL OVERLAY BAR (PITCH MODE FOR CLIENT) -->
+    <div id="proposalBar" class="sticky top-0 z-50 bg-amber-500/10 backdrop-blur-md border-b border-amber-500/30 px-4 py-2.5 text-xs md:text-sm text-amber-200 transition-all">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium text-xs border border-amber-500/40">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> MODO PROPUESTA CLIENTE
+                </span>
+                <span class="hidden sm:inline text-stone-300">Demostración interactiva de propuesta web para <strong>T-Bone / Comercio Local Bogotá</strong></span>
+            </div>
+            
+            <div class="flex items-center gap-4 text-xs font-mono">
+                <div class="flex items-center gap-1.5 text-emerald-400">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    <span>+45% Reservas Directas</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 text-amber-300">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span>0.8s Carga Ultrarrápida</span>
+                </div>
+                <button onclick="toggleProposalStats()" class="hover:text-white underline decoration-amber-500 underline-offset-4 flex items-center gap-1">
+                    <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i> Ver Métricas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROPOSAL METRICS MODAL -->
+    <div id="proposalStatsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-stone-900 border border-amber-500/30 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative">
+            <button onclick="toggleProposalStats()" class="absolute top-4 right-4 text-stone-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="p-3 bg-amber-500/10 rounded-xl text-amber-500 border border-amber-500/20">
+                    <i data-lucide="line-chart" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif text-amber-100">Impacto Comercial Estimado</h3>
+                    <p class="text-sm text-stone-400">Beneficios de migrar de redes/Matterport a una web propia interactiva</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
+                    <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Ahorro en Comisiones</p>
+                    <p class="text-2xl font-bold text-emerald-400">0% Intermediarios</p>
+                    <p class="text-xs text-stone-400 mt-1">Elimina pagos del 15%-25% a plataformas de terceros en reservas directas.</p>
+                </div>
+                <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
+                    <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Conversión desde Maps</p>
+                    <p class="text-2xl font-bold text-amber-400">+3.5x Clientes</p>
+                    <p class="text-xs text-stone-400 mt-1">El botón de reserva directa captura inmediatamente al usuario de Google Maps.</p>
+                </div>
+                <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
+                    <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Retención Móvil</p>
+                    <p class="text-2xl font-bold text-amber-400">100% Accesible</p>
+                    <p class="text-xs text-stone-400 mt-1">No requiere tener cuenta de Instagram ni aplicaciones adicionales.</p>
+                </div>
+                <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
+                    <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Cierre en WhatsApp</p>
+                    <p class="text-2xl font-bold text-emerald-400">Respuestas Pre-calificadas</p>
+                    <p class="text-xs text-stone-400 mt-1">Los clientes llegan con fecha, hora y pedido seleccionado.</p>
+                </div>
+            </div>
+
+            <button onclick="toggleProposalStats(); scrollToReservas();" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-xl transition flex items-center justify-center gap-2">
+                <span>Probar simulador de reservación</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-[37px] z-40 bg-stone-950/90 backdrop-blur-md border-b border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-stone-950 font-bold font-serif text-xl shadow-lg group-hover:scale-105 transition">
+                    T
+                </div>
+                <div>
+                    <span class="font-serif text-xl md:text-2xl font-bold tracking-tight text-stone-100 block group-hover:text-amber-400 transition">T-BONE</span>
+                    <span class="text-[10px] uppercase tracking-widest text-amber-500 font-semibold block -mt-1">Restaurante & Cava • Bogotá</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-300">
+                <a href="#hero" class="hover:text-amber-400 transition">Inicio</a>
+                <a href="#menu" class="hover:text-amber-400 transition">Carta Digital</a>
+                <a href="#experiencia" class="hover:text-amber-400 transition">Recorrido & Cava</a>
+                <a href="#ubicacion" class="hover:text-amber-400 transition">Ubicación</a>
+            </nav>
+
+            <!-- Action CTA Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 transition">
+                    <i data-lucide="utensils" class="w-4 h-4 text-amber-500"></i>
+                    <span>Ver Carta</span>
+                </a>
+                <a href="#reservas" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold gold-gradient-bg text-stone-950 hover:brightness-110 transition shadow-lg shadow-amber-500/10">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>Reservar Mesa</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-stone-950 bg-grid-pattern py-16">
+        <!-- Background Lighting FX -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-red-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column Content -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-medium">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Zona Gastronómica La Candelaria / Usaquén, Bogotá
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-stone-100 leading-tight">
+                    Cortes Premium, <br class="hidden sm:inline"/>
+                    <span class="gold-gradient-text">Maduración Perfecta</span> & Cava Exclusiva.
+                </h1>
+
+                <p class="text-stone-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Una experiencia culinaria diseñada para amantes de la buena carne en Bogotá. Degusta cortes importados y nacionales madurados en seco, maridados con etiquetas seleccionadas de nuestra cava privada.
+                </p>
+
+                <!-- Hero Actions -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#reservas" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-stone-950 gold-gradient-bg hover:scale-[1.02] active:scale-[0.98] transition shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2">
+                        <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
+                        <span>Reservar mi Experiencia</span>
+                    </a>
+                    
+                    <a href="#experiencia" class="w-full sm:w-auto px-6 py-4 rounded-xl font-medium text-stone-300 bg-stone-900 hover:bg-stone-800 border border-stone-800 transition flex items-center justify-center gap-2 group">
+                        <i data-lucide="play-circle" class="w-5 h-5 text-amber-500 group-hover:scale-110 transition"></i>
+                        <span>Explorar Ambiente 3D</span>
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="pt-8 grid grid-cols-3 gap-4 border-t border-stone-800/80 max-w-lg mx-auto lg:mx-0 text-left">
+                    <div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">4.9★</div>
+                        <div class="text-xs text-stone-500">Reseñas en Google</div>
+                    </div>
+                    <div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">35 Días</div>
+                        <div class="text-xs text-stone-500">Maduración Dry-Aged</div>
+                    </div>
+                    <div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">+120</div>
+                        <div class="text-xs text-stone-500">Etiquetas de Vinos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column Visual Hero Card -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden border border-amber-500/20 bg-stone-900 shadow-2xl group">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1000" alt="Corte T-Bone Premium Steak" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent"></div>
+                    
+                    <!-- Floating Highlight Tag -->
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-stone-900/90 backdrop-blur-md border border-stone-700/60 shadow-xl">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Especialidad de la Casa</span>
+                            <span class="text-xs font-mono text-emerald-400 font-medium">Disponible Hoy</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-lg text-white">T-Bone Dry Aged 800g</h4>
+                        <p class="text-xs text-stone-400">Servido en piedra volcánica a 300°C con mantequilla de finas hierbas.</p>
+                        <div class="mt-3 flex items-center justify-between pt-2 border-t border-stone-800">
+                            <span class="text-amber-400 font-bold font-mono">$165.000 COP</span>
+                            <button onclick="quickSelectMenuItem('T-Bone Dry Aged 800g', 165000)" class="px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold transition flex items-center gap-1">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Agregar a pedido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DIGITAL MENU SECTION -->
+    <section id="menu" class="py-20 bg-stone-900/60 border-y border-stone-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-amber-500 font-semibold text-xs uppercase tracking-widest">Nuestra Gastronomía</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-stone-100">Carta Digital Interactiva</h2>
+                <p class="text-stone-400 text-sm sm:text-base">Explora nuestros cortes, entradas y selección de vinos. Puedes armar tu selección anticipada para tu reserva.</p>
+            </div>
+
+            <!-- Search & Filters Bar -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 p-1.5 bg-stone-950 rounded-2xl border border-stone-800 w-full md:w-auto" id="categoryTabs">
+                    <button onclick="filterCategory('todos')" class="menu-tab-btn active px-4 py-2 rounded-xl text-xs font-semibold transition bg-amber-500 text-stone-950" data-cat="todos">Todos</button>
+                    <button onclick="filterCategory('cortes')" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-stone-400 hover:text-white transition" data-cat="cortes">Cortes Especiales</button>
+                    <button onclick="filterCategory('entradas')" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-stone-400 hover:text-white transition" data-cat="entradas">Entradas</button>
+                    <button onclick="filterCategory('vinos')" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-stone-400 hover:text-white transition" data-cat="vinos">Vinos & Cócteles</button>
+                    <button onclick="filterCategory('postres')" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-stone-400 hover:text-white transition" data-cat="postres">Postres</button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full md:w-72">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-500"></i>
+                    <input type="text" id="menuSearch" oninput="searchMenu()" placeholder="Buscar en la carta..." class="w-full bg-stone-950 border border-stone-800 rounded-xl pl-10 pr-4 py-2 text-xs text-stone-200 placeholder-stone-500 focus:outline-none focus:border-amber-500">
+                </div>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div id="menuItemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will render item cards here dynamically -->
+            </div>
+
+            <!-- Order Tray Floating Bar -->
+            <div id="orderTray" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-stone-900/95 backdrop-blur-xl border border-amber-500/40 rounded-2xl px-6 py-3.5 shadow-2xl flex items-center justify-between gap-6 hidden max-w-lg w-[92%]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-stone-950 flex items-center justify-center font-bold text-sm">
+                        <span id="trayItemCount">0</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-stone-400">Pre-selección de pedido</p>
+                        <p id="trayTotalPrice" class="text-base font-bold font-mono text-amber-400">$0 COP</p>
+                    </div>
+                </div>
+                <a href="#reservas" onclick="transferOrderToReservation()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-xs transition flex items-center gap-1.5">
+                    <span>Continuar Reserva</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VIRTUAL TOUR & ATMOSPHERE SHOWCASE -->
+    <section id="experiencia" class="py-20 bg-stone-950 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-amber-500 font-semibold text-xs uppercase tracking-widest">Recorrido Interactivo 3D</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-stone-100">Vive el Ambiente Antes de Llegar</h2>
+                    <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                        Integramos recorridos virtuales y vistas de espacios para que selecciones la mesa perfecta para reuniones de negocios, aniversarios o eventos familiares.
+                    </p>
+
+                    <div class="space-y-3">
+                        <button onclick="setHotspotSpot('cava')" class="w-full p-4 rounded-xl bg-stone-900 border border-stone-800 hover:border-amber-500/50 text-left transition flex items-center justify-between group">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-amber-500/10 text-amber-500 rounded-lg group-hover:bg-amber-500 group-hover:text-stone-950 transition">
+                                    <i data-lucide="wine" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-stone-200">Cava Privada de Vinos</h4>
+                                    <p class="text-xs text-stone-500">Capacidad para 12 personas en espacio climatizado.</p>
+                                </div>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-600 group-hover:text-amber-500"></i>
+                        </button>
+
+                        <button onclick="setHotspotSpot('salon')" class="w-full p-4 rounded-xl bg-stone-900 border border-stone-800 hover:border-amber-500/50 text-left transition flex items-center justify-between group">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-amber-500/10 text-amber-500 rounded-lg group-hover:bg-amber-500 group-hover:text-stone-950 transition">
+                                    <i data-lucide="flame" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-stone-200">Salón Principal & Parrilla a la Vista</h4>
+                                    <p class="text-xs text-stone-500">Ambiente cálido con iluminación tenues y música en vivo.</p>
+                                </div>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-600 group-hover:text-amber-500"></i>
+                        </button>
+
+                        <button onclick="setHotspotSpot('terraza')" class="w-full p-4 rounded-xl bg-stone-900 border border-stone-800 hover:border-amber-500/50 text-left transition flex items-center justify-between group">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-amber-500/10 text-amber-500 rounded-lg group-hover:bg-amber-500 group-hover:text-stone-950 transition">
+                                    <i data-lucide="sun" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-stone-200">Terraza Candelaria</h4>
+                                    <p class="text-xs text-stone-500">Vista panorámica a la arquitectura colonial de Bogotá.</p>
+                                </div>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-600 group-hover:text-amber-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Virtual Hotspot Mockup Frame -->
+                <div class="lg:col-span-7">
+                    <div class="relative rounded-3xl overflow-hidden border border-amber-500/30 bg-stone-900 shadow-2xl h-[420px]" id="hotspotFrame">
+                        <img id="hotspotImage" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200" alt="Vista del Restaurante" class="w-full h-full object-cover transition-all duration-500">
+                        <div class="absolute inset-0 bg-stone-950/30"></div>
+
+                        <!-- Hotspot Info Overlay Badge -->
+                        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-stone-950/85 backdrop-blur-md border border-stone-800">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span id="hotspotBadge" class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Zona Seleccionada</span>
+                                    <h4 id="hotspotTitle" class="font-serif font-bold text-lg text-white mt-1">Salón Principal & Parrilla</h4>
+                                </div>
+                                <a href="#reservas" class="px-4 py-2 bg-amber-500 text-stone-950 font-bold text-xs rounded-xl hover:bg-amber-400 transition">
+                                    Reservar esta zona
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVATION SYSTEM / ORDER SIMULATOR -->
+    <section id="reservas" class="py-20 bg-stone-900 border-t border-stone-800 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center space-y-3 mb-10">
+                <span class="text-amber-500 font-semibold text-xs uppercase tracking-widest">Atención Inmediata</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-stone-100">Reserva tu Mesa en Línea</h2>
+                <p class="text-stone-400 text-sm">Sin intermediarios, confirmación directa al instante vía WhatsApp o correo.</p>
+            </div>
+
+            <div class="bg-stone-950 rounded-3xl p-6 sm:p-8 border border-stone-800 shadow-2xl relative">
+                
+                <form id="reservaForm" onsubmit="handleReservationSubmit(event)" class="space-y-6">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Nombre -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Nombre Completo *</label>
+                            <input type="text" required id="resNombre" placeholder="Ej: Carlos Mendoza" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                        </div>
+
+                        <!-- Telefono WhatsApp -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Teléfono / WhatsApp *</label>
+                            <input type="tel" required id="resTelefono" placeholder="+57 300 123 4567" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                        </div>
+
+                        <!-- Fecha -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Fecha de Reserva *</label>
+                            <input type="date" required id="resFecha" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                        </div>
+
+                        <!-- Hora -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Hora de Servicio *</label>
+                            <select required id="resHora" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                <option value="12:30 PM">12:30 PM (Almuerzo)</option>
+                                <option value="01:30 PM">01:30 PM (Almuerzo)</option>
+                                <option value="07:00 PM">07:00 PM (Cena)</option>
+                                <option value="08:30 PM" selected>08:30 PM (Cena)</option>
+                                <option value="09:30 PM">09:30 PM (Cena)</option>
+                            </select>
+                        </div>
+
+                        <!-- Numero de Personas -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Número de Personas *</label>
+                            <select required id="resPersonas" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                <option value="2 Personas">2 Personas (Pareja)</option>
+                                <option value="4 Personas" selected>4 Personas (Familia/Amigos)</option>
+                                <option value="6 Personas">6 Personas (Grupo)</option>
+                                <option value="10+ Personas">10+ Personas (Evento Especial)</option>
+                            </select>
+                        </div>
+
+                        <!-- Zona de Preferencia -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Ubicación de Preferencia</label>
+                            <select id="resZona" class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500">
+                                <option value="Salón Principal">Salón Principal & Parrilla</option>
+                                <option value="Cava Privada">Cava Privada de Vinos</option>
+                                <option value="Terraza">Terraza La Candelaria</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Pre-pedido summary inside form -->
+                    <div id="formOrderSummary" class="hidden p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200">
+                        <p class="font-bold mb-1 flex items-center gap-1.5">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400"></i>
+                            Platos pre-seleccionados de la Carta Digital:
+                        </p>
+                        <ul id="summaryList" class="list-disc list-inside space-y-1 text-stone-300"></ul>
+                    </div>
+
+                    <!-- Notas Especiales -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Notas o Requerimientos Especiales</label>
+                        <textarea id="resNotas" rows="2" placeholder="Ej: Aniversario de bodas, preferencia de término de carne, alergias..." class="w-full bg-stone-900 border border-stone-800 rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl gold-gradient-bg hover:brightness-110 text-stone-950 font-bold text-base transition shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                        <span>Confirmar Reserva por WhatsApp</span>
+                    </button>
+                </form>
+
+                <!-- Success Confirmation Card -->
+                <div id="reservaSuccess" class="hidden text-center py-12 space-y-4">
+                    <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
+                        <i data-lucide="check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-stone-100">¡Reserva Solicitada con Éxito!</h3>
+                    <p class="text-stone-400 text-sm max-w-md mx-auto">
+                        Se ha preparado tu mensaje personalizado para enviarlo al equipo de recepción de T-Bone Bogotá.
+                    </p>
+                    <button onclick="resetReservaForm()" class="px-6 py-2.5 rounded-xl bg-stone-800 text-stone-200 hover:bg-stone-700 text-xs font-semibold transition">
+                        Realizar otra reserva
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & FOOTER -->
+    <section id="ubicacion" class="py-16 bg-stone-950 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg gold-gradient-bg flex items-center justify-center font-bold text-stone-950 font-serif">T</div>
+                        <span class="font-serif font-bold text-lg text-white">T-Bone Bogotá</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        Cortes madurados, cava seleccionada y la mejor experiencia gastronómica en el centro histórico y gastronómico de la ciudad.
+                    </p>
+                </div>
+
+                <div class="space-y-2 text-xs text-stone-400">
+                    <h4 class="font-bold uppercase tracking-wider text-stone-200 mb-3">Ubicación & Horarios</h4>
+                    <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i> Calle 12C # 3-12, La Candelaria, Bogotá</p>
+                    <p class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-amber-500"></i> Lunes a Sábado: 12:00 PM - 10:30 PM</p>
+                    <p class="flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-amber-500"></i> Domingos: 12:00 PM - 6:00 PM</p>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold uppercase tracking-wider text-stone-200 text-xs mb-3">Contacto Directo</h4>
+                    <a href="https://wa.me/573001234567" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition w-full justify-center">
+                        <i data-lucide="message-square" class="w-4 h-4"></i>
+                        <span>Atención por WhatsApp</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-stone-900 text-center text-xs text-stone-600">
+                <p>© 2026 T-Bone Restaurante. Propuesta de rediseño y desarrollo de prototipo interactivo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP DIRECT ACTION BUTTON -->
+    <a href="https://wa.me/573001234567?text=Hola%20T-Bone,%20quisiera%20consultar%20disponibilidad%20de%20mesa" target="_blank" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-stone-950 p-4 rounded-full shadow-2xl shadow-emerald-500/30 transition hover:scale-110 flex items-center justify-center group">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pl-0 group-hover:pl-2">
+            Pedir por WhatsApp
+        </span>
+    </a>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // MENU DATA
+        const MENU_ITEMS = [
+            {
+                id: 1,
+                title: "T-Bone Dry Aged 800g",
+                category: "cortes",
+                price: 165000,
+                description: "Corte madurado en seco durante 35 días. Combina lomo fino y chuletones con gran marmóreo.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600",
+                badge: "Recomendado"
+            },
+            {
+                id: 2,
+                title: "Bife de Chorizo 400g",
+                category: "cortes",
+                price: 98000,
+                description: "Corte angus con capa externa de grasa caramelizada al carbón.",
+                image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80&w=600",
+                badge: null
+            },
+            {
+                id: 3,
+                title: "Tomahawk Steak 1200g",
+                category: "cortes",
+                price: 245000,
+                description: "Ideal para compartir entre 2 a 3 personas. Servido con chimichurri casero.",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=600",
+                badge: "Premium"
+            },
+            {
+                id: 4,
+                title: "Provoleta Artesanal al Horno",
+                category: "entradas",
+                price: 38000,
+                description: "Queso provolone fundido en cazuela de hierro con orégano fresco y tomates confitados.",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=600",
+                badge: null
+            },
+            {
+                id: 5,
+                title: "Embalado de Chorizos de la Casa",
+                category: "entradas",
+                price: 32000,
+                description: "Chorizo artesanal de res y cerdo con arepitas de chócolo y suero costeño.",
+                image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&q=80&w=600",
+                badge: null
+            },
+            {
+                id: 6,
+                title: "Catena Zapata Malbec 750ml",
+                category: "vinos",
+                price: 185000,
+                description: "Vino tinto argentino de gran cuerpo, notas de ciruela y roble. Maridaje perfecto para cortes grasos.",
+                image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=600",
+                badge: "Cava"
+            },
+            {
+                id: 7,
+                title: "Cóctel Ahumado Old Fashioned",
+                category: "vinos",
+                price: 42000,
+                description: "Bourbon, amargo de angostura, piel de naranja y humo de roble americano en mesa.",
+                image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=600",
+                badge: "Autor"
+            },
+            {
+                id: 8,
+                title: "Volcán de Arequipe & Helado de Vainilla",
+                category: "postres",
+                price: 28000,
+                description: "Bizcocho tibio de centro fluido de arequipe colombiano servido con helado artesanal.",
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=600",
+                badge: null
+            }
+        ];
+
+        let selectedItems = [];
+        let currentCategory = 'todos';
+
+        // Initialize Lucide Icons
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderMenuItems(MENU_ITEMS);
+            
+            // Set default date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('resFecha').valueAsDate = tomorrow;
+        });
+
+        // Toggle Proposal Metrics
+        function toggleProposalStats() {
+            const modal = document.getElementById('proposalStatsModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Filter Menu Categories
+        function filterCategory(cat) {
+            currentCategory = cat;
+            
+            // Update active tab buttons
+            document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+                if(btn.dataset.cat === cat) {
+                    btn.className = "menu-tab-btn active px-4 py-2 rounded-xl text-xs font-semibold transition bg-amber-500 text-stone-950";
+                } else {
+                    btn.className = "menu-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-stone-400 hover:text-white transition";
+                }
+            });
+
+            applyMenuFilter();
+        }
+
+        function searchMenu() {
+            applyMenuFilter();
+        }
+
+        function applyMenuFilter() {
+            const query = document.getElementById('menuSearch').value.toLowerCase();
+            let filtered = MENU_ITEMS;
+
+            if (currentCategory !== 'todos') {
+                filtered = filtered.filter(item => item.category === currentCategory);
+            }
+
+            if (query.trim() !== '') {
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)
+                );
+            }
+
+            renderMenuItems(filtered);
+        }
+
+        // Render Menu Cards
+        function renderMenuItems(items) {
+            const grid = document.getElementById('menuItemsGrid');
+            
+            if(items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-stone-500">
+                        <i data-lucide="utensils" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                        <p class="text-sm">No se encontraron platillos en esta categoría.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            grid.innerHTML = items.map(item => `
+                <div class="bg-stone-950 rounded-2xl overflow-hidden border border-stone-800 hover:border-amber-500/40 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-stone-900">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            ${item.badge ? `
+                                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-stone-950/80 backdrop-blur-md text-amber-400 font-bold text-[10px] border border-amber-500/30">
+                                    ${item.badge}
+                                </span>
+                            ` : ''}
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="font-serif font-bold text-lg text-stone-100 group-hover:text-amber-400 transition">${item.title}</h3>
+                            <p class="text-xs text-stone-400 line-clamp-2 leading-relaxed">${item.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-stone-900 mt-4">
+                        <span class="font-mono font-bold text-amber-400 text-sm">$${item.price.toLocaleString('es-CO')} COP</span>
+                        <button onclick="toggleOrderItem(${item.id})" class="px-3 py-1.5 rounded-xl ${isItemSelected(item.id) ? 'bg-emerald-500 text-stone-950' : 'bg-stone-800 hover:bg-amber-500 hover:text-stone-950 text-stone-300'} text-xs font-semibold transition flex items-center gap-1">
+                            <i data-lucide="${isItemSelected(item.id) ? 'check' : 'plus'}" class="w-3.5 h-3.5"></i>
+                            <span>${isItemSelected(item.id) ? 'Agregado' : 'Agregar'}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function isItemSelected(id) {
+            return selectedItems.some(i => i.id === id);
+        }
+
+        function toggleOrderItem(id) {
+            const item = MENU_ITEMS.find(i => i.id === id);
+            if (!item) return;
+
+            if (isItemSelected(id)) {
+                selectedItems = selectedItems.filter(i => i.id !== id);
+            } else {
+                selectedItems.push(item);
+            }
+
+            updateOrderTray();
+            applyMenuFilter();
+        }
+
+        function quickSelectMenuItem(title, price) {
+            const existing = MENU_ITEMS.find(i => i.title === title);
+            if (existing && !isItemSelected(existing.id)) {
+                selectedItems.push(existing);
+                updateOrderTray();
+                applyMenuFilter();
+            }
+            scrollToReservas();
+        }
+
+        function updateOrderTray() {
+            const tray = document.getElementById('orderTray');
+            const countEl = document.getElementById('trayItemCount');
+            const priceEl = document.getElementById('trayTotalPrice');
+
+            if (selectedItems.length > 0) {
+                tray.classList.remove('hidden');
+                countEl.textContent = selectedItems.length;
+                const total = selectedItems.reduce((acc, curr) => acc + curr.price, 0);
+                priceEl.textContent = `$${total.toLocaleString('es-CO')} COP`;
+            } else {
+                tray.classList.add('hidden');
+            }
+        }
+
+        function transferOrderToReservation() {
+            const summaryContainer = document.getElementById('formOrderSummary');
+            const summaryList = document.getElementById('summaryList');
+
+            if (selectedItems.length > 0) {
+                summaryContainer.classList.remove('hidden');
+                summaryList.innerHTML = selectedItems.map(i => `
+                    <li>${i.title} - <span class="font-mono">$${i.price.toLocaleString('es-CO')} COP</span></li>
+                `).join('');
+            } else {
+                summaryContainer.classList.add('hidden');
+            }
+        }
+
+        function scrollToReservas() {
+            document.getElementById('reservas').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Virtual Hotspot switcher
+        function setHotspotSpot(zone) {
+            const img = document.getElementById('hotspotImage');
+            const title = document.getElementById('hotspotTitle');
+            const badge = document.getElementById('hotspotBadge');
+
+            if (zone === 'cava') {
+                img.src = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=1200";
+                title.textContent = "Cava Privada de Vinos";
+                badge.textContent = "Reserva Exclusiva";
+            } else if (zone === 'terraza') {
+                img.src = "https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&fit=crop&q=80&w=1200";
+                title.textContent = "Terraza La Candelaria";
+                badge.textContent = "Vista Panorámica";
+            } else {
+                img.src = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200";
+                title.textContent = "Salón Principal & Parrilla";
+                badge.textContent = "Ambiente Clásico";
+            }
+        }
+
+        // Handle Reservation Submission via WhatsApp
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('resNombre').value;
+            const telefono = document.getElementById('resTelefono').value;
+            const fecha = document.getElementById('resFecha').value;
+            const hora = document.getElementById('resHora').value;
+            const personas = document.getElementById('resPersonas').value;
+            const zona = document.getElementById('resZona').value;
+            const notas = document.getElementById('resNotas').value;
+
+            let pedidoTexto = "";
+            if (selectedItems.length > 0) {
+                const total = selectedItems.reduce((acc, curr) => acc + curr.price, 0);
+                pedidoTexto = `%0A%0A*Pre-pedido de Platos:*%0A` + selectedItems.map(i => `- ${i.title}`).join('%0A') + `%0A*Total estimado:* $${total.toLocaleString('es-CO')} COP`;
+            }
+
+            const mensaje = `Hola T-Bone Bogotá, quisiera confirmar una reserva:%0A` +
+                `👤 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
+                `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
+                `📅 *Fecha:* ${encodeURIComponent(fecha)}%0A` +
+                `⏰ *Hora:* ${encodeURIComponent(hora)}%0A` +
+                `👥 *Personas:* ${encodeURIComponent(personas)}%0A` +
+                `📍 *Zona:* ${encodeURIComponent(zona)}` +
+                (notas ? `%0A📝 *Notas:* ${encodeURIComponent(notas)}` : '') +
+                pedidoTexto;
+
+            // Open WhatsApp with populated message
+            window.open(`https://wa.me/573001234567?text=${mensaje}`, '_blank');
+
+            // Toggle form state UI
+            document.getElementById('reservaForm').classList.add('hidden');
+            document.getElementById('reservaSuccess').classList.remove('hidden');
+        }
+
+        function resetReservaForm() {
+            document.getElementById('reservaForm').reset();
+            document.getElementById('reservaForm').classList.remove('hidden');
+            document.getElementById('reservaSuccess').classList.add('hidden');
+            selectedItems = [];
+            updateOrderTray();
+        }
+    </script>
+</body>
+</html>
