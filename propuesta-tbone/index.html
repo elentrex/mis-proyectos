@@ -37,6 +37,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        .image-fallback {
+            object-fit: contain !important;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(245,158,11,.12), rgba(28,25,23,.96) 70%);
+        }
         .gold-gradient-text {
             background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
             -webkit-background-clip: text;
@@ -69,11 +74,11 @@
             <div class="flex items-center gap-4 text-xs font-mono">
                 <div class="flex items-center gap-1.5 text-emerald-400">
                     <i data-lucide="trending-up" class="w-4 h-4"></i>
-                    <span>+45% Reservas Directas</span>
+                    <span>Optimización de reservas</span>
                 </div>
                 <div class="hidden md:flex items-center gap-1.5 text-amber-300">
                     <i data-lucide="zap" class="w-4 h-4"></i>
-                    <span>0.8s Carga Ultrarrápida</span>
+                    <span>Experiencia ágil</span>
                 </div>
                 <button onclick="toggleProposalStats()" class="hover:text-white underline decoration-amber-500 underline-offset-4 flex items-center gap-1">
                     <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i> Ver Métricas
@@ -94,20 +99,20 @@
                 </div>
                 <div>
                     <h3 class="text-xl font-bold font-serif text-amber-100">Impacto Comercial Estimado</h3>
-                    <p class="text-sm text-stone-400">Beneficios de migrar de redes/Matterport a una web propia interactiva</p>
+                    <p class="text-sm text-stone-400">Beneficios potenciales de una web propia interactiva</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
                 <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
                     <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Ahorro en Comisiones</p>
-                    <p class="text-2xl font-bold text-emerald-400">0% Intermediarios</p>
-                    <p class="text-xs text-stone-400 mt-1">Elimina pagos del 15%-25% a plataformas de terceros en reservas directas.</p>
+                    <p class="text-2xl font-bold text-emerald-400">Canal directo</p>
+                    <p class="text-xs text-stone-400 mt-1">La reserva puede centralizarse en los canales propios del restaurante.</p>
                 </div>
                 <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
                     <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Conversión desde Maps</p>
-                    <p class="text-2xl font-bold text-amber-400">+3.5x Clientes</p>
-                    <p class="text-xs text-stone-400 mt-1">El botón de reserva directa captura inmediatamente al usuario de Google Maps.</p>
+                    <p class="text-2xl font-bold text-amber-400">Más claridad</p>
+                    <p class="text-xs text-stone-400 mt-1">El botón de reserva reduce pasos entre la visita y la solicitud.</p>
                 </div>
                 <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
                     <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Retención Móvil</p>
@@ -203,16 +208,16 @@
                 <!-- Trust Badges -->
                 <div class="pt-8 grid grid-cols-3 gap-4 border-t border-stone-800/80 max-w-lg mx-auto lg:mx-0 text-left">
                     <div>
-                        <div class="text-amber-400 font-serif text-2xl font-bold">4.9★</div>
-                        <div class="text-xs text-stone-500">Reseñas en Google</div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">Pendiente</div>
+                        <div class="text-xs text-stone-500">Calificación y enlace a Google</div>
                     </div>
                     <div>
-                        <div class="text-amber-400 font-serif text-2xl font-bold">35 Días</div>
-                        <div class="text-xs text-stone-500">Maduración Dry-Aged</div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">Por confirmar</div>
+                        <div class="text-xs text-stone-500">Proceso de maduración</div>
                     </div>
                     <div>
-                        <div class="text-amber-400 font-serif text-2xl font-bold">+120</div>
-                        <div class="text-xs text-stone-500">Etiquetas de Vinos</div>
+                        <div class="text-amber-400 font-serif text-2xl font-bold">Por confirmar</div>
+                        <div class="text-xs text-stone-500">Selección de vinos</div>
                     </div>
                 </div>
             </div>
@@ -227,7 +232,7 @@
                     <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-stone-900/90 backdrop-blur-md border border-stone-700/60 shadow-xl">
                         <div class="flex items-center justify-between mb-1">
                             <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Especialidad de la Casa</span>
-                            <span class="text-xs font-mono text-emerald-400 font-medium">Disponible Hoy</span>
+                            <span class="text-xs font-mono text-amber-300 font-medium">Disponibilidad por confirmar</span>
                         </div>
                         <h4 class="font-serif font-bold text-lg text-white">T-Bone Dry Aged 800g</h4>
                         <p class="text-xs text-stone-400">Servido en piedra volcánica a 300°C con mantequilla de finas hierbas.</p>
@@ -330,7 +335,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-sm text-stone-200">Salón Principal & Parrilla a la Vista</h4>
-                                    <p class="text-xs text-stone-500">Ambiente cálido con iluminación tenues y música en vivo.</p>
+                                    <p class="text-xs text-stone-500">Ambiente cálido; servicios y programación por confirmar.</p>
                                 </div>
                             </div>
                             <i data-lucide="chevron-right" class="w-4 h-4 text-stone-600 group-hover:text-amber-500"></i>
@@ -343,7 +348,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-sm text-stone-200">Terraza Candelaria</h4>
-                                    <p class="text-xs text-stone-500">Vista panorámica a la arquitectura colonial de Bogotá.</p>
+                                    <p class="text-xs text-stone-500">Vista y características del espacio por confirmar.</p>
                                 </div>
                             </div>
                             <i data-lucide="chevron-right" class="w-4 h-4 text-stone-600 group-hover:text-amber-500"></i>
@@ -383,7 +388,7 @@
             <div class="text-center space-y-3 mb-10">
                 <span class="text-amber-500 font-semibold text-xs uppercase tracking-widest">Atención Inmediata</span>
                 <h2 class="text-3xl sm:text-4xl font-serif font-bold text-stone-100">Reserva tu Mesa en Línea</h2>
-                <p class="text-stone-400 text-sm">Sin intermediarios, confirmación directa al instante vía WhatsApp o correo.</p>
+                <p class="text-stone-400 text-sm">Simula una solicitud de reserva; el canal de confirmación se configurará con los datos del restaurante.</p>
             </div>
 
             <div class="bg-stone-950 rounded-3xl p-6 sm:p-8 border border-stone-800 shadow-2xl relative">
@@ -499,16 +504,16 @@
 
                 <div class="space-y-2 text-xs text-stone-400">
                     <h4 class="font-bold uppercase tracking-wider text-stone-200 mb-3">Ubicación & Horarios</h4>
-                    <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i> Calle 12C # 3-12, La Candelaria, Bogotá</p>
+                    <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i> Dirección exacta por confirmar · Bogotá</p>
                     <p class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-amber-500"></i> Lunes a Sábado: 12:00 PM - 10:30 PM</p>
                     <p class="flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-amber-500"></i> Domingos: 12:00 PM - 6:00 PM</p>
                 </div>
 
                 <div class="space-y-3">
                     <h4 class="font-bold uppercase tracking-wider text-stone-200 text-xs mb-3">Contacto Directo</h4>
-                    <a href="https://wa.me/573001234567" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition w-full justify-center">
+                    <a href="#reservas" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition w-full justify-center">
                         <i data-lucide="message-square" class="w-4 h-4"></i>
-                        <span>Atención por WhatsApp</span>
+                        <span>WhatsApp por configurar</span>
                     </a>
                 </div>
 
@@ -521,15 +526,30 @@
     </section>
 
     <!-- FLOATING WHATSAPP DIRECT ACTION BUTTON -->
-    <a href="https://wa.me/573001234567?text=Hola%20T-Bone,%20quisiera%20consultar%20disponibilidad%20de%20mesa" target="_blank" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-stone-950 p-4 rounded-full shadow-2xl shadow-emerald-500/30 transition hover:scale-110 flex items-center justify-center group">
+    <a href="#reservas" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-stone-950 p-4 rounded-full shadow-2xl shadow-emerald-500/30 transition hover:scale-110 flex items-center justify-center group">
         <i data-lucide="message-circle" class="w-6 h-6"></i>
         <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pl-0 group-hover:pl-2">
-            Pedir por WhatsApp
+            Solicitar reserva
         </span>
     </a>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Datos pendientes de validación con el restaurante antes de publicar.
+        const RESTAURANT_CONTACT_WHATSAPP = '';
+
+        // Fallback local para evitar tarjetas rotas si un proveedor externo bloquea una imagen.
+        function useImageFallback(event) {
+            const image = event.target;
+            if (image.tagName !== 'IMG' || image.dataset.fallbackApplied) return;
+            image.dataset.fallbackApplied = 'true';
+            image.classList.add('image-fallback');
+            image.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="#1c1917"/><circle cx="320" cy="150" r="55" fill="#f59e0b" opacity=".16"/><path d="M280 150h80M320 110v80" stroke="#fbbf24" stroke-width="8" stroke-linecap="round"/><text x="320" y="255" text-anchor="middle" fill="#d6d3d1" font-family="Arial,sans-serif" font-size="20">Imagen por confirmar</text></svg>'
+            );
+        }
+        window.addEventListener('error', useImageFallback, true);
+
         // MENU DATA
         const MENU_ITEMS = [
             {
@@ -537,7 +557,7 @@
                 title: "T-Bone Dry Aged 800g",
                 category: "cortes",
                 price: 165000,
-                description: "Corte madurado en seco durante 35 días. Combina lomo fino y chuletones con gran marmóreo.",
+                description: "Corte que combina lomo fino y chuletones; proceso de maduración por confirmar.",
                 image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600",
                 badge: "Recomendado"
             },
@@ -819,8 +839,10 @@
                 (notas ? `%0A📝 *Notas:* ${encodeURIComponent(notas)}` : '') +
                 pedidoTexto;
 
-            // Open WhatsApp with populated message
-            window.open(`https://wa.me/573001234567?text=${mensaje}`, '_blank');
+            // Demo-safe behavior: only opens WhatsApp once the real number is configured.
+            if (RESTAURANT_CONTACT_WHATSAPP) {
+                window.open(`https://wa.me/${RESTAURANT_CONTACT_WHATSAPP}?text=${mensaje}`, '_blank');
+            }
 
             // Toggle form state UI
             document.getElementById('reservaForm').classList.add('hidden');
@@ -837,3 +859,4 @@
     </script>
 </body>
 </html>
+
